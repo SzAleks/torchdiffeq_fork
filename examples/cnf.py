@@ -11,11 +11,13 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+# setup device agnostic code
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--adjoint', action='store_true')
-parser.add_argument('--viz', action='store_true')
-parser.add_argument('--niters', type=int, default=1000)
+parser.add_argument('--adjoint', type=bool, default=True)
+parser.add_argument('--viz', type=bool, default=True)
+parser.add_argument('--niters', type=int, default=100)
 parser.add_argument('--lr', type=float, default=1e-3)
 parser.add_argument('--num_samples', type=int, default=512)
 parser.add_argument('--width', type=int, default=64)
@@ -26,6 +28,7 @@ parser.add_argument('--results_dir', type=str, default="./results")
 args = parser.parse_args()
 
 if args.adjoint:
+    print('Using adjoint ODE')
     from torchdiffeq import odeint_adjoint as odeint
 else:
     from torchdiffeq import odeint
@@ -204,6 +207,8 @@ if __name__ == '__main__':
     print('Training complete after {} iters.'.format(itr))
 
     if args.viz:
+        print("nice")
+        print(args.viz)
         viz_samples = 30000
         viz_timesteps = 41
         target_sample, _ = get_batch(viz_samples)

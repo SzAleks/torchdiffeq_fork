@@ -12,11 +12,11 @@ parser.add_argument('--method', type=str, choices=['dopri5', 'adams'], default='
 parser.add_argument('--data_size', type=int, default=1000)
 parser.add_argument('--batch_time', type=int, default=10)
 parser.add_argument('--batch_size', type=int, default=20)
-parser.add_argument('--niters', type=int, default=2000)
+parser.add_argument('--niters', type=int, default=1000)
 parser.add_argument('--test_freq', type=int, default=20)
-parser.add_argument('--viz', action='store_true')
+parser.add_argument('--viz', type=bool, default=True)
 parser.add_argument('--gpu', type=int, default=0)
-parser.add_argument('--adjoint', action='store_true')
+parser.add_argument('--adjoint', type=bool, default=True)
 args = parser.parse_args()
 
 if args.adjoint:
@@ -76,6 +76,7 @@ def visualize(true_y, pred_y, odefunc, itr):
         ax_traj.plot(t.cpu().numpy(), pred_y.cpu().numpy()[:, 0, 0], '--', t.cpu().numpy(), pred_y.cpu().numpy()[:, 0, 1], 'b--')
         ax_traj.set_xlim(t.cpu().min(), t.cpu().max())
         ax_traj.set_ylim(-2, 2)
+        
         ax_traj.legend()
 
         ax_phase.cla()

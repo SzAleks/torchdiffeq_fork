@@ -10,6 +10,8 @@ from torchdiffeq import odeint_event
 
 torch.set_default_dtype(torch.float64)
 
+# setup device agnostic code
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class BouncingBallExample(nn.Module):
     def __init__(self, radius=0.2, gravity=9.8, adjoint=False):

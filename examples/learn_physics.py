@@ -213,7 +213,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--base_lr", type=float, default=0.1)
-    parser.add_argument("--num_iterations", type=int, default=1000)
+    parser.add_argument("--num_iterations", type=int, default=300)
     parser.add_argument("--no_events", action="store_true")
     parser.add_argument("--save", type=str, default="figs")
     args = parser.parse_args()

@@ -6,3 +6,8 @@
 .vscode
 build
 dist
+png
+results
+train_dir
+figs
+*.png
